@@ -50,14 +50,14 @@
 		<p></p>
             <form onsubmit="return validateForm()">
 		<label for="emailaddress">Email:</label>
-		<input type="text" id="emailaddress" name="Email">
+		<input type="text" id="emailaddress" name="emailaddress">
 		<p></p>
 
-		<label for="Name">Name:</label>
-		<input type="text" id="Name" name="Name">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name">
 		<p></p>
-		<label for= "Telephone number">Telephone number (opitional): </label>
-                <input type="text" id="telephonenumber" name="Telephone number">
+		<label for= "telephonenumber">Telephone number (optional): </label>
+        <input type="text" id="telephonenumber" name="telephonenumber">
 		
                 <p></p>
 
@@ -65,7 +65,7 @@
                 <input type="text" id="age" name="age">
                 <p></p>
 
-                <label for="Address">Address:</label>
+                <label for="address">Address:</label>
                 <input type="text" id="address" name="address">
 		 <button type="submit">Submit</button>
             </form>
@@ -89,27 +89,35 @@
 <script>
 		function validateForm() {
 			
+			event.preventDefault();
+			
 			var emailaddress = document.getElementById("emailaddress").value;
 			var name = document.getElementById("name").value;
+			var telephonenumber = document.getElementById("telephonenumber").value;
+			var age = document.getElementById("age").value;
+			var address = document.getElementById("address").value;
 			
-			//Ensures that username is not empty 
-			if (username === "") {
-				alert("Username cannot be empty");
-				return false;
-			} else if (username.length < 5) {
-				alert("Username must be at least 5 characters long");
-				return false;
+			let isValid = true;
+			
+			
+			//Ensures that name is not empty 
+			if (name === "") {
+				alert("Name cannot be empty");
+				isValid = false;
+			} else if (telephonenumber.length > 0 && telephonenumber.length < 10) {
+				alert("Telephone number must be 10 characters long");
+				isValid = false;
 			}
 
 
-
+			if (isValid) {
 			// Creates a JSON object from the userput 
             var formData = {
-                emailaddress: emailaddress
-              	 name: name
-		telephonenumber: document.getElementById("telephonenumber").value,
-                age: document.getElementById("age").value,
-                address: document.getElementById("address").value
+                emailaddress: emailaddress,
+              	name: name,
+				telephonenumber: telephonenumber,
+                age: age,
+                address: address
             
 		    
             };
@@ -120,7 +128,11 @@
           
 
 			// If all passes then is allowed to go through 
+			alert('Form submitted successfully!');
 			return true;
+			} else {
+				return false;
+			}
 		}
 	</script>
 
