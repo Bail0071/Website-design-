@@ -1,12 +1,10 @@
-<html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The webstie</title>
-      <link rel="stylesheet" href="design.css">
-
+    <title>The Website</title>
+    <link rel="stylesheet" href="design.css">
 </head>
 <body>
 
@@ -21,28 +19,36 @@
         <a href="#contact">Contact</a>
     </nav>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="hero-image.jpg" alt="Hero Image" />
+        <h2>Explore the Best Services</h2>
+        <p>Your journey to the best experience starts here!</p>
+        <button><a href="#services">Discover More</a></button>
+    </section>
+
     <div class="container">
         <div class="main-content">
             <h2>Main Content Area</h2>
-          
         </div>
 
+        <!-- Sidebar with Recent Posts and Newsletter -->
         <div class="sidebar">
-            <h3>Sidebar</h3>
+            <h3>Subscribe to Our Newsletter</h3>
+            <form action="subscribe.php" method="post">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+
+            <h3>Recent Blog Posts</h3>
+            <ul>
+                <li><a href="#post1">How to Build a Great Website</a></li>
+                <li><a href="#post2">Web Design Trends for 2024</a></li>
+                <li><a href="#post3">Tips for Optimizing Your Site</a></li>
+            </ul>
+
+            <h3>Related Links</h3>
             <ul>
                 <li><a href="#link1">Related Link 1</a></li>
                 <li><a href="#link2">Related Link 2</a></li>
-                <li><a href="#link3">Related Link 3</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 My Website. All Rights Reserved.</p>
-    </footer>
-
-</body>
-</html>
-
-  
-</html>
+ 
