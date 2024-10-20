@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <h1>Product Management</h1>
+    </header>
+
+    <div class="container mt-4">
+        <form id="productForm" onsubmit="return validateProductForm()">
+            <div class="form-group">
+                <label for="productId">Product ID (required):</label>
+                <input type="text" id="productId" name="productId" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="productDescription">Product Description (required):</label>
+                <input type="text" id="productDescription" name="productDescription" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="productCategory">Product Category (required):</label>
+                <input type="text" id="productCategory" name="productCategory" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="productUOM">Product Unit of Measure (required):</label>
+                <input type="text" id="productUOM" name="productUOM" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="productPrice">Product Price (required):</label>
+                <input type="number" id="productPrice" name="productPrice" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="productWeight">Product Weight (optional):</label>
+                <input type="text" id="productWeight" name="productWeight" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="product_management.js"></script>
+</body>
+</html>
