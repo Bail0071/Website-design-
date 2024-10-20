@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>Techshop</title>
+    <style>
+        .form-control-dark {
+            background-color: #343a40; /* Dark background */
+            color: #ffffff; /* Light text color */
+            border: 1px solid #495057; /* Border color */
+        }
+        .form-control-dark:focus {
+            border-color: blue; /* Blue border on focus */
+            background-color: #343a40; /* Maintain dark background */
+            color: #ffffff; /* Maintain light text color */
+        }
+        .white-border {
+            border-color: rgb(92, 92, 92); /* White border color */
+        }
+        .white-right-border {
+            border-right: 1px solid rgb(57, 57, 57); /* White right border */
+        }
+    </style>
+</head>
+<body class="bg-dark text-white">
+    <div class="container mt-4">
+        <h2>Techshop Product Management Panel</h2>
+        <hr class="border-color white-border">
+
+        <div class="row">
+            <div class="col-md-6 border-color white-right-border">
+                <h5>Product Creation Menu</h5>
+
+                <form id="productForm">
+                    <div class="mb-3">
+                        <label for="productId" class="form-label">Product Id:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-dark" id="productId" required>
+                            <button class="btn btn-secondary" type="button" id="generateProductId">Generate</button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productDescription" class="form-label">Product Description:</label>
+                        <input type="text" class="form-control form-control-dark" id="productDescription" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productCategory" class="form-label">Product Category:</label>
+                        <input type="text" class="form-control form-control-dark" id="productCategory" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productUnit" class="form-label">Product Unit of Measure:</label>
+                        <input type="text" class="form-control form-control-dark" id="productUnit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Product Price:</label>
+                        <input type="number" step="0.01" class="form-control form-control-dark" id="productPrice" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productWeight" class="form-label">Product Weight (optional):</label>
+                        <input type="number" step="0.01" class="form-control form-control-dark" id="productWeight">
+                    </div>
+                    <button type="button" id="addProduct" class="btn btn-primary">Add/Update Product</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div id="productList" class="">
+                    <h5>Product List</h5>
+                    <ul id="productDisplay" class="list-group">
+                        <!-- Example of a product card -->
+                        Nothing!
+                        <!-- Repeat for each product -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>

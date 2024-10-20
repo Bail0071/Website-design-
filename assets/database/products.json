@@ -1,0 +1,12 @@
+{
+    "products": [
+        {
+            "productId": "1",
+            "productDescription": "Apple Macbook Pro",
+            "productCategory": "Laptops",
+            "productUnit": "Unit A",
+            "productPrice": "1000.9",
+            "productWeight": "10"
+        }
+    ]
+}
