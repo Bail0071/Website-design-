@@ -1,0 +1,29 @@
+body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-theme .list-group-item {
+    background-color: #1e1e1e;
+    border-color: #333333;
+}
+
+body.dark-theme .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+body.dark-theme .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+body.dark-theme .btn {
+    color: #ffffff;
+}
+
+body.dark-theme input[type="text"] {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444444;
+}

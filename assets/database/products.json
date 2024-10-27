@@ -12,34 +12,9 @@
             "productId": "2",
             "productDescription": "Nike Air Zoom Pegasus 39",
             "productCategory": "Shoes",
-            "productUnit": "Pair",
+            "productUnit": "Unit B",
             "productPrice": "129.99",
-            "productWeight": "1.2"
-        },
-        {
-            "productId": "3",
-            "productDescription": "Adidas Ultraboost 22",
-            "productCategory": "Shoes",
-            "productUnit": "Pair",
-            "productPrice": "180.0",
-            "productWeight": "1.1"
-        },
-        {
-            "productId": "4",
-            "productDescription": "Wilson Evolution Basketball",
-            "productCategory": "Sports Equipment",
-            "productUnit": "Ball",
-            "productPrice": "59.99",
-            "productWeight": "1.4"
-        },
-        {
-            "productId": "5",
-            "productDescription": "Yonex Badminton Racket Astrox 99",
-            "productCategory": "Sports Equipment",
-            "productUnit": "Unit C",
-            "productPrice": "220.0",
-            "productWeight": "0.3"
+            "productWeight": "1"
         }
     ]
 }
-
