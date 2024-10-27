@@ -1,0 +1,20 @@
+{
+    "products": [
+        {
+            "productId": "1",
+            "productDescription": "Apple Macbook Pro",
+            "productCategory": "Laptops",
+            "productUnit": "Unit A",
+            "productPrice": "1000.9",
+            "productWeight": "10"
+        },
+        {
+            "productId": "2",
+            "productDescription": "Nike Air Zoom Pegasus 39",
+            "productCategory": "Shoes",
+            "productUnit": "Unit B",
+            "productPrice": "129.99",
+            "productWeight": "1"
+        }
+    ]
+}

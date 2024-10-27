@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Website</title>
+    <title>Go to Sports</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="design.css">
 </head>
 <body>
 
     <header class="bg-primary text-white text-center py-4">
-        <h1>Welcome to My Website</h1>
+        <h1>Welcome to Go to Sports</h1>
     </header>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,35 +40,38 @@
                     <h2>Main Content Area</h2>
                     <p>This is the main content area where you can add more details about your website.</p>
                 </div>
+
+                <p>If you would like to receive updates about our store, please sign up below!</p>
+
+                <form onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="emailaddress">Email:</label>
+                        <input type="text" id="emailaddress" name="emailaddress" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telephonenumber">Telephone number (optional):</label>
+                        <input type="text" id="telephonenumber" name="telephonenumber" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="text" id="age" name="age" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
-
-	<p></p>
-	<p></p>
-
-            <p>If you would like to recieve updates about our store, please sign up below!</p>
-		<p></p>
-		<p></p>
-            <form onsubmit="return validateForm()">
-		<label for="emailaddress">Email:</label>
-		<input type="text" id="emailaddress" name="emailaddress">
-		<p></p>
-
-		<label for="name">Name:</label>
-		<input type="text" id="name" name="name">
-		<p></p>
-		<label for= "telephonenumber">Telephone number (optional): </label>
-        <input type="text" id="telephonenumber" name="telephonenumber">
-		
-                <p></p>
-
-                <label for="age">Age:</label>
-                <input type="text" id="age" name="age">
-                <p></p>
-
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="address">
-		 <button type="submit">Submit</button>
-            </form>
 
             <div class="col-md-4">
                 <div class="sidebar bg-light p-3">
@@ -86,55 +89,43 @@
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2024 My Website. All Rights Reserved.</p>
     </footer>
-<script>
-		function validateForm() {
-			
-			event.preventDefault();
-			
-			var emailaddress = document.getElementById("emailaddress").value;
-			var name = document.getElementById("name").value;
-			var telephonenumber = document.getElementById("telephonenumber").value;
-			var age = document.getElementById("age").value;
-			var address = document.getElementById("address").value;
-			
-			let isValid = true;
-			
-			
-			//Ensures that name is not empty 
-			if (name === "") {
-				alert("Name cannot be empty");
-				isValid = false;
-			} else if (telephonenumber.length > 0 && telephonenumber.length < 10) {
-				alert("Telephone number must be 10 characters long");
-				isValid = false;
-			}
 
+    <script>
+        function validateForm() {
+            event.preventDefault();
+            var emailaddress = document.getElementById("emailaddress").value;
+            var name = document.getElementById("name").value;
+            var telephonenumber = document.getElementById("telephonenumber").value;
+            var age = document.getElementById("age").value;
+            var address = document.getElementById("address").value;
 
-			if (isValid) {
-			// Creates a JSON object from the userput 
-            var formData = {
-                emailaddress: emailaddress,
-              	name: name,
-		telephonenumber: telephonenumber,
-                age: age,
-                address: address
-            
-		    
-            };
+            let isValid = true;
 
-            // Log the JSON object to the console
-            console.log(JSON.stringify(formData));
+            if (name === "") {
+                alert("Name cannot be empty");
+                isValid = false;
+            } else if (telephonenumber.length > 0 && telephonenumber.length < 10) {
+                alert("Telephone number must be 10 characters long");
+                isValid = false;
+            }
 
-          
+            if (isValid) {
+                var formData = {
+                    emailaddress: emailaddress,
+                    name: name,
+                    telephonenumber: telephonenumber,
+                    age: age,
+                    address: address
+                };
 
-			// If all passes then is allowed to go through 
-			alert('Form submitted successfully!');
-			return true;
-			} else {
-				return false;
-			}
-		}
-	</script>
+                console.log(JSON.stringify(formData));
+                alert('Form submitted successfully!');
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
