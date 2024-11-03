@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shipping Selection</title>
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap 4.5.2 CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Shipping Selection</h2>
-        <form>
+        <form id="shippingForm">
             <!-- Shipping Destination -->
             <div class="form-group">
                 <label for="destination" class="form-label">Shipping Destination</label>
@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label for="carrier" class="form-label">Select Shipping Carrier</label>
                 <select id="carrier" class="form-control">
-                    <option selected disabled>Choose a carrier</option>
+                    <option selected>Choose a carrier</option>
                     <option value="fedex">FedEx</option>
                     <option value="ups">UPS</option>
                     <option value="usps">USPS</option>
@@ -33,7 +33,7 @@
             <div class="form-group">
                 <label for="method" class="form-label">Select Shipping Method</label>
                 <select id="method" class="form-control">
-                    <option selected disabled>Choose a method</option>
+                    <option selected>Choose a method</option>
                     <option value="standard">Standard Shipping (3-5 days)</option>
                     <option value="express">Express Shipping (1-2 days)</option>
                     <option value="overnight">Overnight Shipping</option>
@@ -44,6 +44,45 @@
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </form>
     </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('shippingForm');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const destination = document.getElementById('destination').value.trim();
+                const carrier = document.getElementById('carrier').value;
+                const method = document.getElementById('method').value;
+
+                if (!destination) {
+                    alert('Please enter a shipping destination.');
+                    return;
+                }
+                if (carrier === 'Choose a carrier') {
+                    alert('Please select a shipping carrier.');
+                    return;
+                }
+                if (method === 'Choose a method') {
+                    alert('Please select a shipping method.');
+                    return;
+                }
+
+                const shippingData = {
+                    shippingDestination: destination,
+                    shippingCarrier: carrier,
+                    shippingMethod: method
+                };
+
+                console.log('Shipping Data:', JSON.stringify(shippingData, null, 2));
+                alert('Form submitted successfully!\nCheck the console for the JSON data.');
+            });
+        });
+    </script>
+
+    <!-- Bootstrap 4.5.2 JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
