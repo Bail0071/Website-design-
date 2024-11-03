@@ -42,4 +42,16 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Shipping Data:', JSON.stringify(shippingData, null, 2));
        alert('Form submitted successfully!\nCheck the console for the JSON data.');
    })
+
+      // Form Validation
+      document.getElementById('shipping-form').addEventListener('submit', function(event) {
+       const destination = document.getElementById('destination').value;
+       const carrier = document.getElementById('carrier').value;
+       const method = document.getElementById('method').value;
+
+       if (!destination || !carrier || !method) {
+          alert('Please fill out all fields.');
+          event.preventDefault();
+       }
+   });
 });
