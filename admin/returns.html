@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handle Returns</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 1em 0;
+    }
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select, textarea, button {
+      margin-top: 5px;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Product Returns</h1>
+  </header>
+  
+  <main>
+    <section>
+      <h2>Search for Your Order</h2>
+      <form id="return-search">
+        <label for="order-id">Order ID:</label>
+        <input type="text" id="order-id" name="order-id" required>
+        
+        <label for="product-name">Product Name:</label>
+        <input type="text" id="product-name" name="product-name">
+        
+        <button type="submit">Search</button>
+      </form>
+    </section>
+    
+    <section>
+      <h2>Return Details</h2>
+      <form id="return-form">
+        <label for="reason">Reason for Return:</label>
+        <select id="reason" name="reason">
+          <option value="defective">Defective</option>
+          <option value="wrong-item">Wrong Item</option>
+          <option value="other">Other</option>
+        </select>
+        
+        <label for="comments">Additional Comments:</label>
+        <textarea id="comments" name="comments"></textarea>
+        
+        <button type="submit">Submit Return Request</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
