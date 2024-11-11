@@ -1,0 +1,16 @@
+{
+  "returns": [
+    {
+      "orderId": "ORD123456",
+      "productName": "Wireless Earbuds",
+      "reason": "defective",
+      "comments": "Right earbud not functioning properly"
+    },
+    {
+      "orderId": "ORD789012",
+      "productName": "Smartphone Case",
+      "reason": "wrong-item",
+      "comments": "Received incorrect color"
+    }
+  ]
+}
