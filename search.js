@@ -1,11 +1,29 @@
 $(document).ready(function() {
-    // Load product data and display all items initially
+    // Display all products initially
     displayProducts(products);
 
-    // Search function (triggered on button click)
-    $("#searchBtn").click(function() {
-        const searchQuery = $("#searchInput").val().toLowerCase();
+    // Debounce function to limit search operations
+    function debounce(func, delay) {
+        let debounceTimer;
+        return function() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => func.apply(this, arguments), delay);
+        };
+    }
+
+    // Search function
+    $("#searchInput").on("keyup", debounce(function() {
+        const searchQuery = $(this).val().toLowerCase().trim();
         const filteredProducts = products.filter(p => p.name.toLowerCase().includes(searchQuery));
-        displayProducts(filteredProducts);
-    });
-});// JavaScript Document
+        
+        if (filteredProducts.length > 0) {
+            displayProducts(filteredProducts);
+        } else {
+            displayNoResultsMessage();
+        }
+    }, 300)); // Adjust debounce delay as needed
+
+    function displayNoResultsMessage() {
+        $("#productContainer").html("<p>No products found.</p>");
+    }
+});
