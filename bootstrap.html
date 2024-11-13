@@ -41,44 +41,48 @@
                     <p>This is the main content area where you can add more details about your website.</p>
                 </div>
 
-                <p>If you would like to receive updates about our store, please sign up below!</p>
-
-                <form onsubmit="return validateForm()">
-                    <div class="form-group">
-                        <label for="emailaddress">Email:</label>
-                        <input type="text" id="emailaddress" name="emailaddress" class="form-control">
+                <section class="mt-4">
+                    <h3>Featured Products</h3>
+                    <div class="product-list">
+                        <div class="product bg-light p-3 mb-3">
+                            <h4>Basketball</h4>
+                            <p>High-quality basketball for indoor and outdoor play.</p>
+                        </div>
+                        <div class="product bg-light p-3 mb-3">
+                            <h4>Soccer Ball</h4>
+                            <p>Durable soccer ball for all weather conditions.</p>
+                        </div>
+                        <div class="product bg-light p-3 mb-3">
+                            <h4>Tennis Racket</h4>
+                            <p>Lightweight and powerful tennis racket.</p>
+                        </div>
                     </div>
+                </section>
 
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" class="form-control">
-                    </div>
+                <section class="mt-4">
+                    <h3>Subscribe for Updates</h3>
+                    <form onsubmit="return validateForm()" style="max-width: 400px;">
+                        <div class="form-group">
+                            <label for="emailaddress">Email:</label>
+                            <input type="text" id="emailaddress" name="emailaddress" class="form-control">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="telephonenumber">Telephone number (optional):</label>
-                        <input type="text" id="telephonenumber" name="telephonenumber" class="form-control">
-                    </div>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" class="form-control">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="age">Age:</label>
-                        <input type="text" id="age" name="age" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Address:</label>
-                        <input type="text" id="address" name="address" class="form-control">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </section>
             </div>
 
             <div class="col-md-4">
                 <div class="sidebar bg-light p-3">
                     <h3>Sidebar</h3>
                     <ul class="list-unstyled">
-                        <li><a href="admin/shopping-cart.html">Shopping Cart</a></li>
-                        <li><a href="admin/returns.html">Returns</a></li>
+                        <li><a href="shopping-cart.html">Shopping Cart</a></li>
+                        <li><a href="returns.html">Returning</a></li>
                     </ul>
                 </div>
             </div>
@@ -94,27 +98,18 @@
             event.preventDefault();
             var emailaddress = document.getElementById("emailaddress").value;
             var name = document.getElementById("name").value;
-            var telephonenumber = document.getElementById("telephonenumber").value;
-            var age = document.getElementById("age").value;
-            var address = document.getElementById("address").value;
 
             let isValid = true;
 
             if (name === "") {
                 alert("Name cannot be empty");
                 isValid = false;
-            } else if (telephonenumber.length > 0 && telephonenumber.length < 10) {
-                alert("Telephone number must be 10 characters long");
-                isValid = false;
             }
 
             if (isValid) {
                 var formData = {
                     emailaddress: emailaddress,
-                    name: name,
-                    telephonenumber: telephonenumber,
-                    age: age,
-                    address: address
+                    name: name
                 };
 
                 console.log(JSON.stringify(formData));
