@@ -52,17 +52,23 @@ $(document).ready(function() {
             productWeight: $('#productWeight').val() || null
         };
 
-        const existingIndex = products.findIndex(p => p.productId === product.productId);
-        if (existingIndex > -1) {
-            products[existingIndex] = product;
-        } else {
-            products.push(product);
-        }
-
-        // Save to localStorage
-        localStorage.setItem('products', JSON.stringify(products));
-
-        displayProducts();
+        // Send to backend API
+        fetch('http://localhost:5000/api/products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(product)
+        })
+        .then(response => response.json())
+        .then(data => {
+            displayProducts();
+            showNotification('Product added successfully!');
+        })
+        .catch(error => {
+            showNotification('Error adding product');
+            console.error('Error:', error);
+        });
     });
 
     // Add event listener for the generate button

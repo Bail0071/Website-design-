@@ -4,127 +4,333 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Go to Sports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Russo+One&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="design.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --sport-red: #ff4d4d;
+            --sport-blue: #007bff;
+        }
+
+        body {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .navbar-brand {
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .logo-icon {
+            background: var(--sport-red);
+            color: white;
+            padding: 8px;
+            border-radius: 12px;
+            margin-right: 10px;
+            transform: rotate(-10deg);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(-10deg); }
+            50% { transform: translateY(-10px) rotate(-5deg); }
+            100% { transform: translateY(0px) rotate(-10deg); }
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://bushwellssportinggoods.com/files/2019/08/1565804514634_baseball.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding-top: 100px; 
+            padding-bottom: 40px;
+            margin-top: 40px;
+            margin-bottom: 42px;
+            position: relative;
+            overflow: hidden;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 10px,
+                rgba(0, 0, 0, 0.2) 10px,
+                rgba(0, 0, 0, 0.2) 20px
+            );
+        }
+
+        .display-3 {
+            font-family: 'Russo One', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0 var(--sport-red);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 3px 3px 0 var(--sport-red); }
+            to { text-shadow: 3px 3px 20px var(--sport-red); }
+        }
+
+        .nav-link {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem !important;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--sport-red);
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--sport-red);
+            border-color: var(--sport-red);
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 12px 30px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255,255,255,0.3),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+
+        .btn-primary:hover::after {
+            transform: rotate(45deg) translateX(100%) translateY(100%);
+        }
+
+        .btn-primary:hover {
+            background: #ff3333;
+            border-color: #ff3333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 77, 77, 0.4);
+        }
+
+        .product-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: -20px 20px 30px rgba(0,0,0,0.2);
+        }
+
+        .product-card img {
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05) translateZ(20px);
+        }
+
+        .card-title {
+            font-family: 'Russo One', sans-serif;
+            color: var(--sport-blue);
+        }
+
+        .product-card {
+            transition: transform 0.3s;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .navbar {
+            background: rgba(255,255,255,0.95) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .subscribe-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0;
+        }
+    </style>
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="bootstrap.html">Go to Sports</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="bootstrap.html">
+            <i class="fas fa-running mr-2"></i>Go to Sports
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
+                    <a class="nav-link" href="about.html"><i class="fas fa-info-circle mr-1"></i> About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin/shopping-cart.html">Shopping Cart</a>
+                    <a class="nav-link" href="admin/shopping-cart.html"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="returns.html">Returns</a>
+                    <a class="nav-link" href="returns.html"><i class="fas fa-undo mr-1"></i> Returns</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin/product-management.html">Products</a>
+                    <a class="nav-link" href="admin/product-management.html"><i class="fas fa-box-open mr-1"></i> Products</a>
                 </li>
             </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <header class="bg-primary text-white text-center py-4">
-        <h1>Welcome to Go to Sports</h1>
-    </header>
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-3 font-weight-bold mb-4">Welcome to Go to Sports</h1>
+        <p class="lead mb-4">Your Ultimate Destination for Premium Sports Equipment</p>
+        <a href="#featured" class="btn btn-primary btn-lg px-5">Explore Products</a>
+    </div>
+</section>
 
-
-    <div class="container my-4">
+<div class="container">
+    <section id="featured" class="mb-5">
+        <h2 class="text-center mb-4">Featured Products</h2>
         <div class="row">
-            <div class="col-md-8">
-                <div class="main-content">
-                    <h2>Go To Sports</h2>
-                    <p>Welcome to Go To Sports. We are a new sports store that has all the items that you could need!</p>
-                </div>
-
-                <section class="mt-4">
-                    <h3>Featured Products</h3>
-                    <div class="product-list">
-                        <div class="product bg-light p-3 mb-3">
-                            <h4>Basketball</h4>
-                            <p>High-quality basketball for indoor and outdoor play.</p>
-                        </div>
-                        <div class="product bg-light p-3 mb-3">
-                            <h4>Soccer Ball</h4>
-                            <p>Durable soccer ball for all weather conditions.</p>
-                        </div>
-                        <div class="product bg-light p-3 mb-3">
-                            <h4>Tennis Racket</h4>
-                            <p>Lightweight and powerful tennis racket.</p>
-                        </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card h-100">
+                    <img src="https://media.istockphoto.com/id/1636022764/photo/basketball-ball.jpg?s=612x612&w=0&k=20&c=NVi1V5dCAZKUHdrhnRq-G5t8XSvZE1YXvgw8NxX3N0I=" class="card-img-top" alt="Basketball">
+                    <div class="card-body">
+                        <h5 class="card-title">Premium Basketball</h5>
+                        <p class="card-text">Professional-grade basketball for indoor and outdoor play.</p>
+                        <h4 class="text-primary mb-3">$29.99</h4>
+                        <button class="btn btn-primary btn-block">Add to Cart</button>
                     </div>
-                </section>
-
-                <section class="mt-4">
-                    <h3>Subscribe for Updates</h3>
-                    <form onsubmit="return validateForm()" style="max-width: 400px;">
-                        <div class="form-group">
-                            <label for="emailaddress">Email:</label>
-                            <input type="text" id="emailaddress" name="emailaddress" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" class="form-control">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </section>
+                </div>
             </div>
+            <!-- Add two more similar product cards -->
+        </div>
+    </section>
 
+    <section class="subscribe-section text-center">
+        <h3 class="mb-4">Stay Updated with Latest Offers</h3>
+        <form onsubmit="return validateForm()" class="mx-auto" style="max-width: 500px;">
+            <div class="form-group">
+                <input type="email" id="emailaddress" class="form-control form-control-lg" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <input type="text" id="name" class="form-control form-control-lg" placeholder="Your name">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg px-5">Subscribe Now</button>
+        </form>
+    </section>
+</div>
+
+<footer class="footer mt-5">
+    <div class="container">
+        <div class="row">
             <div class="col-md-4">
-                <div class="sidebar bg-light p-3">
-                    <h3>Sidebar</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="admin/shippingmenu.html">Shopping Cart</a></li>
-                        <li><a href="returns.html">Returning</a></li>
-                    </ul>
+                <h5>About Us</h5>
+                <p>Your trusted source for quality sports equipment.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white">Terms & Conditions</a></li>
+                    <li><a href="#" class="text-white">Privacy Policy</a></li>
+                    <li><a href="#" class="text-white">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Connect With Us</h5>
+                <div class="social-icons">
+                    <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
     </div>
+</footer>
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 My Website. All Rights Reserved.</p>
-    </footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Add animation classes to elements when they come into view
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.product-card, .subscribe-section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        });
 
-    <script>
-        function validateForm() {
-            event.preventDefault();
-            var emailaddress = document.getElementById("emailaddress").value;
-            var name = document.getElementById("name").value;
+        elements.forEach(element => observer.observe(element));
+    }
 
-            let isValid = true;
-
-            if (name === "") {
-                alert("Name cannot be empty");
-                isValid = false;
-            }
-
-            if (isValid) {
-                var formData = {
-                    emailaddress: emailaddress,
-                    name: name
-                };
-
-                console.log(JSON.stringify(formData));
-                alert('Form submitted successfully!');
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    document.addEventListener('DOMContentLoaded', animateOnScroll);
+</script>
 </body>
 </html>
