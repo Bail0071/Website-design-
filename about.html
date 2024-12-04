@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About the Team - Go to Sports</title>
+    <title>About the Team - GoToSports</title>
     <!-- Add theme stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Russo+One&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -13,17 +13,18 @@
         :root {
             --sport-red: #ff4d4d;
             --sport-blue: #007bff;
+            --dark-bg: #121212;
+            --dark-surface: #1e1e1e;
         }
 
         body {
             font-family: 'Teko', sans-serif;
-            font-size: 1.1rem;
-            background-color: #f4f4f4;
+            font-size: 1.3rem;
+            background-color: var(--dark-bg);
+            color: #ffffff;
             padding-top: 80px;
             margin: 0;
         }
-
-        /* Add your existing navbar styles here */
 
         .page-header {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
@@ -37,19 +38,21 @@
         }
 
         .page-header h1 {
-            font-family: 'Russo One', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 0 var(--sport-red);
+            font-size: 4rem;
+        }
+
+        .page-header .lead {
+            font-size: 2rem;
         }
 
         .team-member {
-            background: white;
+            background: var(--dark-surface);
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             transition: transform 0.3s ease;
+            color: #ffffff;
         }
 
         .team-member:hover {
@@ -57,24 +60,35 @@
         }
 
         .team-member h2 {
+            font-size: 2.5rem;
             color: var(--sport-blue);
             font-family: 'Russo One', sans-serif;
             margin-bottom: 20px;
         }
 
+        .team-member p {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+
         .contact-info {
-            background: #f8f9fa;
+            background: rgba(255,255,255,0.05);
             padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
         }
 
         .contact-info h2 {
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 15px;
         }
 
+        .contact-info p {
+            font-size: 1.4rem;
+        }
+
         .contact-info a {
+            font-size: 1.4rem;
             color: var(--sport-blue);
             transition: color 0.3s ease;
         }
@@ -130,54 +144,41 @@
             100% { transform: translateY(0px) rotate(-10deg); }
         }
 
-        .navbar {
-            background: rgba(255,255,255,0.95) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+     
 
-        .nav-link {
-            font-family: 'Teko', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 0.5rem 1rem !important;
-            margin: 0 5px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: var(--sport-red);
-            color: white !important;
-            transform: translateY(-2px);
-        }
     </style>
 </head>
 <body>
 
-<!-- Replace existing navbar with this one -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: transparent; transition: all 0.3s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
     <div class="container">
-        <a class="navbar-brand font-weight-bold" href="bootstrap.html">
-            <i class="fas fa-running mr-2"></i>Go to Sports
+        <a class="navbar-brand font-weight-bold" href="bootstrap.html" style="font-family: 'Russo One', sans-serif; font-size: 1.8rem; display: flex; align-items: center; color: #ffffff;">
+            <i class="fas fa-running mr-2" style="background: #ff4d4d; padding: 8px; border-radius: 12px; margin-right: 10px; transform: rotate(-10deg); box-shadow: 3px 3px 0 rgba(0,0,0,0.2);"></i>GoToSports
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" style="border-color: #ffffff;">
+            <span class="navbar-toggler-icon" style="filter: brightness(0) invert(1);"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html"><i class="fas fa-info-circle mr-1"></i> About</a>
+                    <a class="nav-link" href="about.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-info-circle mr-1"></i> About
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin/shopping-cart.html"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
+                    <a class="nav-link" href="admin/shopping-cart.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-shopping-cart mr-1"></i> Cart
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="returns.html"><i class="fas fa-undo mr-1"></i> Returns</a>
+                    <a class="nav-link" href="returns.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-undo mr-1"></i> Returns
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin/product-management.html"><i class="fas fa-box-open mr-1"></i> Products</a>
+                    <a class="nav-link" href="admin/product-management.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-box-open mr-1"></i> Products
+                    </a>
                 </li>
             </ul>
         </div>
@@ -187,11 +188,24 @@
 <header class="page-header">
     <div class="container">
         <h1 class="display-4">Meet Our Team</h1>
-        <p class="lead">The passionate individuals behind Go to Sports</p>
+        <p class="lead">The passionate individuals behind GoToSports</p>
     </div>
 </header>
 
 <div class="container">
+    <div class="team-member animate__animated animate__fadeInUp">
+        <h2><i class="fas fa-user-circle mr-2"></i>Pranav Ramesh</h2>
+        <p><strong>Age:</strong> 20</p>
+        <p><strong>Nickname:</strong> Pranav</p>
+        <p><strong>Favorite Quote:</strong> "just build -somebody"</p>
+        
+        <div class="contact-info">
+            <h2><i class="fas fa-address-card mr-2"></i>Contact Information</h2>
+            <p><i class="fas fa-envelope mr-2"></i><strong>Email:</strong> pkr5325@psu.edu</p>
+            <p><i class="fab fa-linkedin mr-2"></i><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/pranavramesh2/" target="_blank">Pranav Ramesh LinkedIn</a></p>
+        </div>
+    </div>
+
     <div class="team-member animate__animated animate__fadeInUp">
         <h2><i class="fas fa-user-circle mr-2"></i>Bailey Lutz</h2>
         <p><strong>Age:</strong> 21</p>
@@ -235,13 +249,48 @@
 </div>
 
 <footer class="text-center">
-    <p>&copy; 2024 Go to Sports. All rights reserved.</p>
+    <p>&copy; 2024 GoToSports. All rights reserved.</p>
 </footer>
 
 <!-- Add Bootstrap scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Function to update navbar styles
+        function updateNavbar() {
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+            } else {
+                navbar.style.backgroundColor = 'transparent';
+            }
+        }
+
+        // Add hover effects for nav links
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#ff4d4d';
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'transparent';
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Initial call
+        updateNavbar();
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', updateNavbar);
+    });
+</script>
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Go to Sports</title>
+    <title>GoToSports</title>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Russo+One&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -12,11 +12,15 @@
         :root {
             --sport-red: #ff4d4d;
             --sport-blue: #007bff;
+            --dark-bg: #121212;
+            --dark-surface: #1e1e1e;
         }
 
         body {
             font-family: 'Teko', sans-serif;
             font-size: 1.1rem;
+            background-color: var(--dark-bg);
+            color: #ffffff;
         }
 
         .navbar-brand {
@@ -47,47 +51,52 @@
         }
 
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://bushwellssportinggoods.com/files/2019/08/1565804514634_baseball.jpg');
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80');
             background-size: cover;
             background-position: center;
-            color: white;
-            padding-top: 100px; 
-            padding-bottom: 40px;
-            margin-top: 40px;
-            margin-bottom: 42px;
+            background-attachment: fixed;
             position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 120px;
+            margin: 0;
             overflow: hidden;
-            animation: gradientBG 15s ease infinite;
         }
 
-        .hero-section::before {
-            content: '';
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-overlay {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(0, 0, 0, 0.1),
-                rgba(0, 0, 0, 0.1) 10px,
-                rgba(0, 0, 0, 0.2) 10px,
-                rgba(0, 0, 0, 0.2) 20px
-            );
+            height: 50%;
+            background: linear-gradient(to top, rgba(18, 18, 18, 1), rgba(18, 18, 18, 0));
+            z-index: 1;
         }
 
-        .display-3 {
+        .hero-title {
             font-family: 'Russo One', sans-serif;
+            font-size: 5rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 0 var(--sport-red);
-            animation: textGlow 2s ease-in-out infinite alternate;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 0 var(--sport-red),
+                         6px 6px 20px rgba(255, 77, 77, 0.5);
         }
 
-        @keyframes textGlow {
-            from { text-shadow: 3px 3px 0 var(--sport-red); }
-            to { text-shadow: 3px 3px 20px var(--sport-red); }
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
 
         .nav-link {
@@ -188,18 +197,7 @@
             transform: translateY(-5px);
         }
 
-        .navbar {
-            background: rgba(255,255,255,0.95) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .nav-link {
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
-
+       
         .subscribe-section {
             background: #f8f9fa;
             padding: 40px;
@@ -216,39 +214,83 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: transparent; transition: all 0.3s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
     <div class="container">
-        <a class="navbar-brand font-weight-bold" href="bootstrap.html">
-            <i class="fas fa-running mr-2"></i>Go to Sports
+        <a class="navbar-brand font-weight-bold" href="bootstrap.html" style="font-family: 'Russo One', sans-serif; font-size: 1.8rem; display: flex; align-items: center; color: #ffffff;">
+            <i class="fas fa-running mr-2" style="background: #ff4d4d; padding: 8px; border-radius: 12px; margin-right: 10px; transform: rotate(-10deg); box-shadow: 3px 3px 0 rgba(0,0,0,0.2);"></i>GoToSports
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" style="border-color: #ffffff;">
+            <span class="navbar-toggler-icon" style="filter: brightness(0) invert(1);"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html"><i class="fas fa-info-circle mr-1"></i> About</a>
+                    <a class="nav-link" href="about.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-info-circle mr-1"></i> About
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin/shopping-cart.html"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
+                    <a class="nav-link" href="admin/shopping-cart.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-shopping-cart mr-1"></i> Cart
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="returns.html"><i class="fas fa-undo mr-1"></i> Returns</a>
+                    <a class="nav-link" href="returns.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-undo mr-1"></i> Returns
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin/product-management.html"><i class="fas fa-box-open mr-1"></i> Products</a>
+                    <a class="nav-link" href="admin/product-management.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-box-open mr-1"></i> Products
+                    </a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Function to update navbar styles
+        function updateNavbar() {
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+            } else {
+                navbar.style.backgroundColor = 'transparent';
+            }
+        }
+
+        // Add hover effects for nav links
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#ff4d4d';
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'transparent';
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Initial call
+        updateNavbar();
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', updateNavbar);
+    });
+</script>
+
 <section class="hero-section text-center">
-    <div class="container">
-        <h1 class="display-3 font-weight-bold mb-4">Welcome to Go to Sports</h1>
-        <p class="lead mb-4">Your Ultimate Destination for Premium Sports Equipment</p>
-        <a href="#featured" class="btn btn-primary btn-lg px-5">Explore Products</a>
+    <div class="hero-content">
+        <h1 class="display-4 hero-title animate__animated animate__fadeInUp">Welcome to GoToSports</h1>
+        <p class="lead hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">Your Ultimate Destination for Premium Sports Equipment</p>
+        <a href="#featured" class="btn btn-primary btn-lg px-5 animate__animated animate__fadeInUp animate__delay-2s">Explore Products</a>
     </div>
+    <div class="hero-overlay"></div>
 </section>
 
 <div class="container">
@@ -256,13 +298,13 @@
         <h2 class="text-center mb-4">Featured Products</h2>
         <div class="row">
             <div class="col-md-4 mb-4">
-                <div class="card product-card h-100">
+                <div class="card product-card h-100" style="background-color: var(--dark-surface); border: none; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; transform-style: preserve-3d; perspective: 1000px;">
                     <img src="https://media.istockphoto.com/id/1636022764/photo/basketball-ball.jpg?s=612x612&w=0&k=20&c=NVi1V5dCAZKUHdrhnRq-G5t8XSvZE1YXvgw8NxX3N0I=" class="card-img-top" alt="Basketball">
-                    <div class="card-body">
-                        <h5 class="card-title">Premium Basketball</h5>
+                    <div class="card-body" style="color: #ffffff;">
+                        <h5 class="card-title" style="font-family: 'Russo One', sans-serif; color: var(--sport-blue);">Premium Basketball</h5>
                         <p class="card-text">Professional-grade basketball for indoor and outdoor play.</p>
                         <h4 class="text-primary mb-3">$29.99</h4>
-                        <button class="btn btn-primary btn-block">Add to Cart</button>
+                        <button class="btn btn-primary btn-block" style="background: var(--sport-red); border-color: var(--sport-red); text-transform: uppercase; font-weight: bold; letter-spacing: 1px; padding: 12px 30px; border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3); transition: all 0.3s ease;">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -270,41 +312,53 @@
         </div>
     </section>
 
-    <section class="subscribe-section text-center">
+    <section class="subscribe-section text-center" style="background-color: var(--dark-surface); color: #ffffff; padding: 40px; border-radius: 10px; margin-top: 40px;">
         <h3 class="mb-4">Stay Updated with Latest Offers</h3>
         <form onsubmit="return validateForm()" class="mx-auto" style="max-width: 500px;">
             <div class="form-group">
-                <input type="email" id="emailaddress" class="form-control form-control-lg" placeholder="Enter your email">
+                <input type="email" id="emailaddress" class="form-control form-control-lg" placeholder="Enter your email" style="background-color: var(--dark-bg); border-color: #444; color: #ffffff;">
             </div>
             <div class="form-group">
-                <input type="text" id="name" class="form-control form-control-lg" placeholder="Your name">
+                <input type="text" id="name" class="form-control form-control-lg" placeholder="Your name" style="background-color: var(--dark-bg); border-color: #444; color: #ffffff;">
             </div>
-            <button type="submit" class="btn btn-primary btn-lg px-5">Subscribe Now</button>
+            <button type="submit" class="btn btn-primary btn-lg px-5" style="background: var(--sport-red); border-color: var(--sport-red); text-transform: uppercase; font-weight: bold; letter-spacing: 1px; padding: 12px 30px; border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3); transition: all 0.3s ease;">Subscribe Now</button>
         </form>
     </section>
 </div>
 
-<footer class="footer mt-5">
+<footer class="footer mt-5" style="background: var(--dark-surface); color: white; padding: 70px 0; border-top: 1px solid rgba(255,255,255,0.1);">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <h5>About Us</h5>
-                <p>Your trusted source for quality sports equipment.</p>
+            <div class="col-md-4" style="margin-bottom: 30px;">
+                <h5 style="font-family: 'Russo One', sans-serif; margin-bottom: 20px; color: var(--sport-red); font-size: 1.4rem;">About Us</h5>
+                <p style="font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.6;">Your trusted source for quality sports equipment. We bring you the best in athletic gear and sportswear.</p>
             </div>
-            <div class="col-md-4">
-                <h5>Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Terms & Conditions</a></li>
-                    <li><a href="#" class="text-white">Privacy Policy</a></li>
-                    <li><a href="#" class="text-white">Contact Us</a></li>
+            <div class="col-md-4" style="margin-bottom: 30px;">
+                <h5 style="font-family: 'Russo One', sans-serif; margin-bottom: 20px; color: var(--sport-red); font-size: 1.4rem;">Quick Links</h5>
+                <ul class="list-unstyled" style="padding-left: 0;">
+                    <li style="margin-bottom: 12px;">
+                        <a href="#" style="text-decoration: none; font-size: 1rem; color: rgba(255,255,255,0.8); transition: all 0.3s ease; display: inline-block;">Terms & Conditions</a>
+                    </li>
+                    <li style="margin-bottom: 12px;">
+                        <a href="#" style="text-decoration: none; font-size: 1rem; color: rgba(255,255,255,0.8); transition: all 0.3s ease; display: inline-block;">Privacy Policy</a>
+                    </li>
+                    <li style="margin-bottom: 12px;">
+                        <a href="#" style="text-decoration: none; font-size: 1rem; color: rgba(255,255,255,0.8); transition: all 0.3s ease; display: inline-block;">Contact Us</a>
+                    </li>
                 </ul>
             </div>
-            <div class="col-md-4">
-                <h5>Connect With Us</h5>
-                <div class="social-icons">
-                    <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-white mr-3"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-white mr-3"><i class="fab fa-instagram"></i></a>
+            <div class="col-md-4" style="margin-bottom: 30px;">
+                <h5 style="font-family: 'Russo One', sans-serif; margin-bottom: 20px; color: var(--sport-red); font-size: 1.4rem;">Connect With Us</h5>
+                <div class="social-icons" style="font-size: 1.8rem;">
+                    <a href="#" style="text-decoration: none; color: rgba(255,255,255,0.8); margin-right: 20px; transition: all 0.3s ease;">
+                        <i class="fab fa-facebook-f" style="transition: all 0.3s ease;"></i>
+                    </a>
+                    <a href="#" style="text-decoration: none; color: rgba(255,255,255,0.8); margin-right: 20px; transition: all 0.3s ease;">
+                        <i class="fab fa-twitter" style="transition: all 0.3s ease;"></i>
+                    </a>
+                    <a href="#" style="text-decoration: none; color: rgba(255,255,255,0.8); margin-right: 20px; transition: all 0.3s ease;">
+                        <i class="fab fa-instagram" style="transition: all 0.3s ease;"></i>
+                    </a>
                 </div>
             </div>
         </div>
