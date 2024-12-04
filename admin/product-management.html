@@ -24,6 +24,31 @@
         .white-right-border {
             border-right: 1px solid rgb(57, 57, 57); /* White right border */
         }
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .delete-product {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .list-group-item:hover .delete-product {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="bg-dark text-white">
@@ -37,33 +62,30 @@
 
                 <form id="productForm">
                     <div class="mb-3">
-                        <label for="productId" class="form-label">Product Id:</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control form-control-dark" id="productId" required>
-                            <button class="btn btn-secondary" type="button" id="generateProductId">Generate</button>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Product Description:</label>
-                        <input type="text" class="form-control form-control-dark" id="productDescription" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productCategory" class="form-label">Product Category:</label>
-                        <input type="text" class="form-control form-control-dark" id="productCategory" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productUnit" class="form-label">Product Unit of Measure:</label>
-                        <input type="text" class="form-control form-control-dark" id="productUnit" required>
+                        <label for="productName" class="form-label">Product Name:</label>
+                        <input type="text" class="form-control" id="productName" required>
                     </div>
                     <div class="mb-3">
                         <label for="productPrice" class="form-label">Product Price:</label>
-                        <input type="number" step="0.01" class="form-control form-control-dark" id="productPrice" required>
+                        <input type="number" class="form-control" id="productPrice" required>
                     </div>
                     <div class="mb-3">
-                        <label for="productWeight" class="form-label">Product Weight (optional):</label>
-                        <input type="number" step="0.01" class="form-control form-control-dark" id="productWeight">
+                        <label for="productCategory" class="form-label">Product Category:</label>
+                        <input type="text" class="form-control" id="productCategory" required>
                     </div>
-                    <button type="button" id="addProduct" class="btn btn-primary">Add/Update Product</button>
+                    <div class="mb-3">
+                        <label for="productDescription" class="form-label">Product Description:</label>
+                        <textarea class="form-control" id="productDescription" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productStock" class="form-label">Product Stock:</label>
+                        <input type="number" class="form-control" id="productStock" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productImage" class="form-label">Product Image:</label>
+                        <input type="file" class="form-control" id="productImage" accept="image/*" required>
+                    </div>
+                    <button type="button" id="addProduct" class="btn btn-primary">Add Product</button>
                 </form>
             </div>
             <div class="col-md-6">
@@ -88,12 +110,139 @@
             </div>
         </div>
     </div>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../assets/js/script.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            function showNotification(message, isError = false) {
+                const notification = $('<div></div>')
+                    .addClass('alert')
+                    .addClass(isError ? 'alert-danger' : 'alert-success')
+                    .text(message)
+                    .css({
+                        position: 'fixed',
+                        top: '20px',
+                        right: '20px',
+                        zIndex: 1000
+                    });
+                $('body').append(notification);
+                setTimeout(() => notification.remove(), 3000);
+            }
+        
+            async function fetchProducts() {
+                try {
+                    const response = await fetch('http://localhost:3001/api/products');
+                    const products = await response.json();
+                    displayProducts(products);
+                } catch (error) {
+                    showNotification('Error fetching products: ' + error.message, true);
+                }
+            }
+        
+            function displayProducts(products) {
+                const productDisplay = $('#productDisplay');
+                productDisplay.empty();
+                
+                products.forEach(product => {
+                    productDisplay.append(`
+                        <li class="list-group-item bg-dark text-white">
+                            <strong>${product.name}</strong><br>
+                            <span>Description: ${product.description}</span><br>
+                            <span>Category: ${product.category}</span><br>
+                            <span>Price: $${product.price}</span>
+                            <button class="btn btn-danger btn-sm float-end delete-product" data-id="${product._id}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </li>
+                    `);
+                });
+            }
+        
+            async function compressImage(file) {
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = (event) => {
+                        const img = new Image();
+                        img.src = event.target.result;
+                        img.onload = () => {
+                            const canvas = document.createElement('canvas');
+                            const MAX_WIDTH = 800;
+                            const MAX_HEIGHT = 600;
+                            let width = img.width;
+                            let height = img.height;
+
+                            if (width > height) {
+                                if (width > MAX_WIDTH) {
+                                    height *= MAX_WIDTH / width;
+                                    width = MAX_WIDTH;
+                                }
+                            } else {
+                                if (height > MAX_HEIGHT) {
+                                    width *= MAX_HEIGHT / height;
+                                    height = MAX_HEIGHT;
+                                }
+                            }
+
+                            canvas.width = width;
+                            canvas.height = height;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0, width, height);
+                            const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                            resolve(dataUrl);
+                        };
+                    };
+                });
+            }
+        
+            $('#addProduct').click(async function() {
+                const productName = $('#productName').val();
+                const productPrice = parseFloat($('#productPrice').val());
+                const productCategory = $('#productCategory').val();
+                const productDescription = $('#productDescription').val();
+                const productStock = parseInt($('#productStock').val());
+                const productImageFile = $('#productImage')[0].files[0];
+        
+                if (!productImageFile) {
+                    showNotification('Please select an image file.', true);
+                    return;
+                }
+        
+                try {
+                    const compressedImage = await compressImage(productImageFile);
+        
+                    const productData = {
+                        name: productName,
+                        price: productPrice,
+                        category: productCategory,
+                        description: productDescription,
+                        image: compressedImage,
+                        stock: productStock
+                    };
+        
+                    const response = await fetch('http://localhost:3001/api/products', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(productData)
+                    });
+        
+                    if (!response.ok) {
+                        throw new Error('Failed to create product');
+                    }
+        
+                    const savedProduct = await response.json();
+                    showNotification('Product added successfully!');
+                    $('#productForm')[0].reset();
+                    fetchProducts();
+                } catch (error) {
+                    showNotification('Error adding product: ' + error.message, true);
+                }
+            });
+        
+            fetchProducts();
+        });
+        </script>
 </body>
 </html>

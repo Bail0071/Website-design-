@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - GoToSports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --sport-red: #ff4d4d;
+            --sport-blue: #007bff;
+            --dark-bg: #121212;
+            --dark-surface: #1e1e1e;
+        }
+
+        body {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.1rem;
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            padding-top: 80px;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background-color: var(--dark-surface);
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: -20px 20px 30px rgba(0,0,0,0.2);
+        }
+
+        .product-card img {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05) translateZ(20px);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-family: 'Russo One', sans-serif;
+            color: var(--sport-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--sport-red);
+            border-color: var(--sport-red);
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 12px 30px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #ff3333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 77, 77, 0.4);
+        }
+
+        .filters {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            background-color: var(--dark-bg);
+            border-color: #444;
+            color: #ffffff;
+        }
+
+        .form-control:focus {
+            background-color: var(--dark-bg);
+            border-color: var(--sport-red);
+            color: #ffffff;
+            box-shadow: none;
+        }
+
+        .modal-content {
+            border: none;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-header .close {
+            color: #ffffff;
+            text-shadow: none;
+            opacity: 0.8;
+        }
+
+        .modal-header .close:hover {
+            opacity: 1;
+        }
+
+        .product-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::after {
+            content: 'Click to View Details';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 77, 77, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar (same as your other pages) -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: transparent; transition: all 0.3s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="../bootstrap.html" style="font-family: 'Russo One', sans-serif; font-size: 1.8rem; display: flex; align-items: center; color: #ffffff;">
+            <i class="fas fa-running mr-2" style="background: #ff4d4d; padding: 8px; border-radius: 12px; margin-right: 10px; transform: rotate(-10deg); box-shadow: 3px 3px 0 rgba(0,0,0,0.2);"></i>GoToSports
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" style="border-color: #ffffff;">
+            <span class="navbar-toggler-icon" style="filter: brightness(0) invert(1);"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-info-circle mr-1"></i> About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="shopping-cart.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-shopping-cart mr-1"></i> Cart
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../returns.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-undo mr-1"></i> Returns
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="products.html" style="font-family: 'Teko', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem 1rem; margin: 0 5px; border-radius: 5px; transition: all 0.3s ease; color: #ffffff;">
+                        <i class="fas fa-box-open mr-1"></i> Products
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="page-header text-center">
+    <div class="container">
+        <h1 class="display-4 animate__animated animate__fadeInUp">Our Products</h1>
+        <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Discover our premium sports equipment collection</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="filters animate__animated animate__fadeInUp">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" id="category">
+                        <option value="">All Categories</option>
+                        <option value="basketball">Basketball</option>
+                        <option value="football">Football</option>
+                        <option value="soccer">Soccer</option>
+                        <option value="tennis">Tennis</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="price">Price Range</label>
+                    <select class="form-control" id="price">
+                        <option value="">All Prices</option>
+                        <option value="0-25">$0 - $25</option>
+                        <option value="25-50">$25 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100">$100+</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="search">Search</label>
+                    <input type="text" class="form-control" id="search" placeholder="Search products...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="products-container">
+        <!-- Product cards will be dynamically added here -->
+    </div>
+</div>
+
+<!-- Product Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background: var(--dark-surface); color: #ffffff;">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="productModalLabel" style="font-family: 'Russo One', sans-serif; color: var(--sport-blue);"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #ffffff;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img id="productModalImage" src="" alt="Product Image" class="img-fluid rounded" style="width: 100%; height: 300px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <h3 id="productModalPrice" class="mb-4" style="color: var(--sport-red);"></h3>
+                        <p id="productModalDescription" class="mb-4"></p>
+                        <div class="product-details mb-4">
+                            <h4 style="font-family: 'Russo One', sans-serif; color: var(--sport-blue);">Product Details</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check-circle mr-2" style="color: var(--sport-red);"></i>Premium Quality</li>
+                                <li><i class="fas fa-check-circle mr-2" style="color: var(--sport-red);"></i>1 Year Warranty</li>
+                                <li><i class="fas fa-check-circle mr-2" style="color: var(--sport-red);"></i>Free Returns</li>
+                            </ul>
+                        </div>
+                        <div class="quantity-selector mb-4">
+                            <label for="quantity">Quantity:</label>
+                            <select id="quantity" class="form-control d-inline-block ml-2" style="width: 80px; background: var(--dark-bg);">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <h4 style="font-family: 'Russo One', sans-serif; color: var(--sport-blue);">Customer Reviews</h4>
+                        <div class="reviews-container">
+                            <ul id="productModalReviews" class="list-unstyled">
+                                <!-- Reviews will be dynamically inserted here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-review mt-4">
+                    <h4 style="font-family: 'Russo One', sans-serif; color: var(--sport-blue);">Add a Review</h4>
+                    <form id="reviewForm" class="mt-3">
+                        <div class="form-group">
+                            <label for="reviewName">Your Name</label>
+                            <input type="text" class="form-control" id="reviewName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewRating">Rating</label>
+                            <select class="form-control" id="reviewRating" required>
+                                <option value="5">★★★★★</option>
+                                <option value="4">★★★★☆</option>
+                                <option value="3">★★★☆☆</option>
+                                <option value="2">★★☆☆☆</option>
+                                <option value="1">★☆☆☆☆</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewComment">Your Review</label>
+                            <textarea class="form-control" id="reviewComment" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Replace the existing products array with:
+    const products = [];  // We'll fetch this from the backend
+
+    // Function to render products
+    function renderProducts(productsToRender = products) {
+        const container = document.getElementById('products-container');
+        container.innerHTML = '';
+
+        if (productsToRender.length === 0) {
+            container.innerHTML = `
+                <div class="col-12 text-center">
+                    <h3>No products found matching your criteria</h3>
+                </div>
+            `;
+            return;
+        }
+
+        productsToRender.forEach((product, index) => {
+            const productCard = `
+                <div class="col-md-4 animate__animated animate__fadeInUp">
+                    <div class="card product-card" onclick="showProductModal(${index})">
+                        <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">${product.description.substring(0, 100)}${product.description.length > 100 ? '...' : ''}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="text-primary mb-0">$${product.price}</h4>
+                                <span class="badge badge-primary" style="background-color: var(--sport-red);">${product.category}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += productCard;
+        });
+    }
+
+    // Function to filter products
+    function filterProducts() {
+        const categoryFilter = document.getElementById('category').value;
+        const priceFilter = document.getElementById('price').value;
+        const searchTerm = document.getElementById('search').value.toLowerCase();
+
+        let filteredProducts = products;
+
+        // Filter by category
+        if (categoryFilter) {
+            filteredProducts = filteredProducts.filter(product => 
+                product.category === categoryFilter
+            );
+        }
+
+        // Filter by price range
+        if (priceFilter) {
+            const [min, max] = priceFilter.split('-').map(num => parseFloat(num));
+            filteredProducts = filteredProducts.filter(product => {
+                if (max) {
+                    return product.price >= min && product.price <= max;
+                } else {
+                    // Handle "100+" case
+                    return product.price >= min;
+                }
+            });
+        }
+
+        // Filter by search term
+        if (searchTerm) {
+            filteredProducts = filteredProducts.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm)
+            );
+        }
+
+        renderProducts(filteredProducts);
+    }
+
+    // Add event listeners to filters
+    document.getElementById('category').addEventListener('change', filterProducts);
+    document.getElementById('price').addEventListener('change', filterProducts);
+    document.getElementById('search').addEventListener('input', filterProducts);
+
+    // Initial render
+    renderProducts();
+
+    // Navbar scroll effect
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fetch initial products
+        fetchProducts();
+
+        // Existing navbar code
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function updateNavbar() {
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+            } else {
+                navbar.style.backgroundColor = 'transparent';
+            }
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#ff4d4d';
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'transparent';
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        updateNavbar();
+        window.addEventListener('scroll', updateNavbar);
+
+        // Add review form submission handler
+        document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const productId = this.dataset.productId;
+            await submitReview(productId);
+        });
+    });
+
+    // Add this new function to handle showing the modal
+    function showProductModal(index) {
+        const product = products[index];
+        const modal = $('#productModal');
+        
+        modal.find('.modal-title').text(product.name);
+        modal.find('#productModalImage').attr('src', product.image);
+        modal.find('#productModalDescription').text(product.description);
+        modal.find('#productModalPrice').text(`$${product.price}`);
+
+        const reviewsList = modal.find('#productModalReviews');
+        reviewsList.empty();
+        
+        if (product.reviews && product.reviews.length > 0) {
+            product.reviews.forEach(review => {
+                const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                reviewsList.append(`
+                    <li class="mb-3">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="mr-2" style="color: gold;">${stars}</span>
+                            <small class="text-muted">${new Date(review.date).toLocaleDateString()}</small>
+                        </div>
+                        <p class="mb-1"><strong>${review.userName}</strong></p>
+                        <p class="mb-0">${review.comment}</p>
+                    </li>
+                `);
+            });
+        } else {
+            reviewsList.append('<li>No reviews yet</li>');
+        }
+
+        modal.modal('show');
+    }
+
+    // Add this after the products array
+    async function fetchProducts() {
+        try {
+            const response = await fetch('http://localhost:3001/api/products');
+            const data = await response.json();
+            products.length = 0; // Clear existing products
+            products.push(...data);
+            renderProducts();
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            // Show error message to user
+            document.getElementById('products-container').innerHTML = `
+                <div class="col-12 text-center">
+                    <h3>Error loading products. Please try again later.</h3>
+                </div>
+            `;
+        }
+    }
+
+    async function submitReview(productId) {
+        const rating = parseInt($('#reviewRating').val());
+        const comment = $('#reviewComment').val();
+        const userName = $('#reviewName').val();
+
+        try {
+            const response = await fetch(`http://localhost:3001/api/products/${productId}/reviews`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    rating,
+                    comment,
+                    userName
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit review');
+            }
+
+            // Refresh products to show new review
+            await fetchProducts();
+            $('#productModal').modal('hide');
+        } catch (error) {
+            console.error('Error submitting review:', error);
+            alert('Failed to submit review. Please try again.');
+        }
+    }
+</script>
+
+</body>
+</html> 

@@ -53,7 +53,7 @@ $(document).ready(function() {
         };
 
         // Send to backend API
-        fetch('http://localhost:5000/api/products', {
+        fetch('http://localhost:3001/api/products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,23 +1,27 @@
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('./config/db');
-require('dotenv').config();
+const mongoose = require('mongoose');
+const productsRouter = require('./routes/products');
 
 const app = express();
+const port = 3001;
 
-// Connect to MongoDB
-connectDB();
-
-// Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Routes
-app.use('/api/products', require('./routes/products'));
-app.use('/api/cart', require('./routes/cart'));
-app.use('/api/returns', require('./routes/returns'));
+mongoose.connect('mongodb+srv://doadmin:3A9d5Ms7oVT846K1@db-mongodb-nyc3-14006-9503eeb2.mongo.ondigitalocean.com/admin?tls=true&authSource=admin', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const connection = mongoose.connection;
+connection.once('open', () => {
+    console.log("MongoDB database connection established successfully");
+});
+
+app.use('/api/products', productsRouter);
+
+app.listen(port, () => {
+    console.log(`Server is running on port: ${port}`);
 });
