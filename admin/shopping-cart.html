@@ -15,6 +15,8 @@
             --sport-red-dark: #ff3333;
             --sport-gray: #f8f9fa;
             --sport-blue: #007bff;
+            --card-bg: #1e1e1e;
+            --hover-bg: #262626;
         }
 
         body {
@@ -66,14 +68,15 @@
         }
 
         .cart-section {
-            background: #1e1e1e;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         #cartList {
-            max-height: 400px;
+            max-height: 500px;
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: var(--sport-red) #262626;
@@ -98,7 +101,7 @@
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 2px;
-            padding: 15px 30px;
+            padding: 20px 30px;
             border-radius: 50px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
@@ -133,17 +136,19 @@
         }
 
         .total-price {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: var(--sport-red);
-            margin-bottom: 1rem;
+            margin-top: 1rem;
+            padding: 1rem 0;
+            border-top: 2px solid #333;
             text-align: right;
         }
 
         .empty-cart-message {
             text-align: center;
             color: #888;
-            padding: 2rem;
+            padding: 3rem;
             font-style: italic;
             display: flex;
             flex-direction: column;
@@ -152,7 +157,7 @@
         }
 
         .empty-cart-icon {
-            font-size: 3rem;
+            font-size: 4rem;
             color: var(--sport-red);
             opacity: 0.5;
         }
@@ -170,6 +175,50 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Update layout styles */
+        .row {
+            flex-direction: column-reverse;
+        }
+
+        .col-md-4 {
+            margin-bottom: 2rem;
+        }
+
+        /* Make product list more compact */
+        .col-md-8 {
+            margin-top: 3rem;
+        }
+
+        #productList .list-group-item {
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        /* Enhanced Cart Items */
+        #cartList .list-group-item {
+            background: rgba(255,255,255,0.05) !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            margin-bottom: 1rem;
+            border-radius: 20px !important;
+            padding: 1.2rem !important;
+            transition: all 0.3s ease;
+        }
+
+        #cartList .list-group-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.08) !important;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Product Image Styling */
+        .cart-item-image {
+            width: 80px !important;
+            height: 80px !important;
+            border-radius: 15px !important;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
     </style>
@@ -211,32 +260,34 @@
     </nav>
 
     <div class="container mt-5">
-        <h2 class="mb-4" style="color: #ff4d4d; font-family: 'Russo One', sans-serif;">Shopping Cart</h2>
+        <h2 class="mb-4">Your Shopping Cart</h2>
         <div class="row">
-            <div class="col-md-8">
-                <h5 class="mb-3" style="color: #ff4d4d; font-family: 'Russo One', sans-serif;">Available Products</h5>
-                <ul id="productList" class="list-group" style="background: transparent;">
-                    <!-- Products will be dynamically loaded here -->
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <div class="cart-section" style="background: #1e1e1e; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                    <h5 class="mb-3" style="color: #ff4d4d; font-family: 'Russo One', sans-serif;">Your Cart</h5>
-                    <div id="cartList" class="list-group mb-2" style="background: #262626; padding: 15px; border-radius: 10px; border: 1px solid #333;">
-                        <!-- Cart items will be dynamically loaded here -->
-                        <div class="empty-cart-message" style="text-align: center; color: #888;">
-                            <i class="empty-cart-icon fas fa-shopping-cart" style="font-size: 24px; margin-bottom: 10px; color: #ff4d4d;"></i>
-                            Your cart is empty
+            <div class=" ">
+                <div class="cart-section">
+                    <h5 class="mb-2">Cart Items</h5>
+                    <div id="cartList" class="list-group mb-3 pt-4">
+                        <!-- Cart items rendered here -->
+                    </div>
+                    <div class="total-price mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span>$<span id="cartSubtotal">0.00</span></span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Tax (8%):</span>
+                            <span>$<span id="cartTax">0.00</span></span>
+                        </div>
+                        <div class="d-flex justify-content-between font-weight-bold">
+                            <span>Total:</span>
+                            <span>$<span id="cartTotal">0.00</span></span>
                         </div>
                     </div>
-                    <div class="total-price mb-3" style="font-weight: bold; color: #ff4d4d; text-align: right;">
-                        Total: $<span id="cartTotal">0.00</span>
-                    </div>
-                    <button id="checkout" class="btn btn-lg w-100" style="background-color: #ff4d4d; color: white; border: none; padding: 15px 30px; border-radius: 50px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; box-shadow: 0 4px 15px rgba(255,77,77,0.3); transition: all 0.3s ease;">
-                        <i class="fas fa-shopping-bag mr-2"></i>Checkout
+                    <button id="checkout" class="btn btn-lg w-100">
+                        <i class="fas fa-shopping-bag mr-2"></i>Proceed to Checkout
                     </button>
                 </div>
             </div>
+            
         </div>
     </div>
 
@@ -270,6 +321,79 @@
             updateNavbar();
             window.addEventListener('scroll', updateNavbar);
         });
+    </script>
+    <script>
+        // Function to render cart items
+        function renderCart() {
+            const cartList = document.getElementById('cartList');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="empty-cart-message">
+                        <i class="empty-cart-icon fas fa-shopping-cart"></i>
+                        Your cart is empty
+                    </div>
+                `;
+                document.getElementById('cartSubtotal').textContent = '0.00';
+                document.getElementById('cartTax').textContent = '0.00';
+                document.getElementById('cartTotal').textContent = '0.00';
+                return;
+            }
+
+            let subtotal = 0;
+            cartList.innerHTML = cart.map((item, index) => {
+                subtotal += item.price;
+                return `
+                    <div class="list-group-item animate-item d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <img src="${item.image}" alt="${item.name}" class="img-thumbnail mr-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <div>
+                                <h6 class="mb-0">${item.name}</h6>
+                                <small class="text-muted">$${item.price}</small>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            const taxRate = 0.08; // 8% tax rate
+            const tax = subtotal * taxRate;
+            const total = subtotal + tax;
+
+            document.getElementById('cartSubtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('cartTax').textContent = tax.toFixed(2);
+            document.getElementById('cartTotal').textContent = total.toFixed(2);
+        }
+
+        // Function to remove item from cart
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        // Handle checkout
+        document.getElementById('checkout').addEventListener('click', function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Here you would typically handle the checkout process
+            // For now, we'll just clear the cart and show a success message
+            localStorage.removeItem('cart');
+            alert('Thank you for your purchase!');
+            renderCart();
+        });
+
+        // Initial render
+        renderCart();
     </script>
 </body>
 </html>

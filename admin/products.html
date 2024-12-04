@@ -310,7 +310,7 @@
             </div>
             <div class="modal-footer border-0">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add to Cart</button>
+                <button type="button" class="btn btn-primary" onclick="addToCart(products[index])">Add to Cart</button>
             </div>
         </div>
     </div>
@@ -445,10 +445,13 @@
         });
     });
 
-    // Add this new function to handle showing the modal
+    // Update showProductModal function
     function showProductModal(index) {
         const product = products[index];
         const modal = $('#productModal');
+        
+        // Store the index on the modal itself
+        modal.data('productIndex', index);
         
         modal.find('.modal-title').text(product.name);
         modal.find('#productModalImage').attr('src', product.image);
@@ -476,6 +479,9 @@
             reviewsList.append('<li>No reviews yet</li>');
         }
 
+        // Update the Add to Cart button's onclick handler
+        modal.find('.btn-primary').attr('onclick', `addToCart(products[${index}])`);
+        
         modal.modal('show');
     }
 
@@ -527,6 +533,37 @@
             console.error('Error submitting review:', error);
             alert('Failed to submit review. Please try again.');
         }
+    }
+
+    // Add this function to handle adding items to cart
+    function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Show feedback to user
+        const toast = `
+            <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                    <div class="toast-header" style="background-color: var(--sport-red); color: white;">
+                        <strong class="mr-auto">Added to Cart</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body" style="background-color: var(--dark-surface); color: white;">
+                        ${product.name} has been added to your cart
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', toast);
+        
+        // Remove toast after 2 seconds
+        setTimeout(() => {
+            const toastElement = document.querySelector('.toast');
+            if (toastElement) toastElement.remove();
+        }, 2000);
     }
 </script>
 

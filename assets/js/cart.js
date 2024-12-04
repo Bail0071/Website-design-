@@ -2,67 +2,131 @@ $(document).ready(function() {
     // Add a class to the body or a specific container for dark theme
     $('body').addClass('dark-theme');
 
-    let products = JSON.parse(localStorage.getItem('products')) || [];
-    let cart = [];
+    // Cart management
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    function displayProducts() {
-        $('#productList').empty();
-        products.forEach(product => {
-            $('#productList').append(`
-                <li class="list-group-item">
-                    <strong>${product.productDescription}</strong><br>
-                    <span>Price: $${product.productPrice}</span><br>
-                    <button class="btn btn-primary btn-sm add-to-cart" data-id="${product.productId}">Add to Cart</button>
-                </li>
-            `);
-        });
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartDisplay();
     }
 
-    function displayCart() {
-        $('#cartList').empty();
-        cart.forEach(item => {
-            $('#cartList').append(`
-                <li class="list-group-item">
-                    <strong>${item.productDescription}</strong><br>
-                    <span>Price: $${item.productPrice}</span><br>
-                    <button class="btn btn-danger btn-sm remove-from-cart" data-id="${item.productId}">Remove</button>
-                </li>
-            `);
-        });
-    }
-
-    $('#productList').on('click', '.add-to-cart', function() {
-        const productId = $(this).data('id');
-        const product = products.find(p => p.productId === productId);
-        cart.push(product);
-        displayCart();
-    });
-
-    $('#cartList').on('click', '.remove-from-cart', function() {
-        const productId = $(this).data('id');
-        cart = cart.filter(item => item.productId !== productId);
-        displayCart();
-    });
-
-    $('#checkout').click(function() {
-        if (cart.length === 0) {
-            alert('Your cart is empty!');
+    function addToCart(product) {
+        const existingItem = cart.find(item => item.productId === product.productId);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
         } else {
-            $.ajax({
-                url: '/api/checkout',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(cart),
-                success: function(response) {
-                    alert('Checkout successful!');
-                    cart = [];
-                    displayCart();
-                },
-                error: function() {
-                    alert('Error during checkout.');
-                }
+            cart.push({
+                productId: product.productId,
+                productDescription: product.productDescription,
+                productPrice: product.productPrice,
+                quantity: 1
             });
         }
+        
+        saveCart();
+        showNotification('Item added to cart!');
+    }
+
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.productId !== productId);
+        saveCart();
+        showNotification('Item removed from cart!');
+    }
+
+    function updateCartDisplay() {
+        const cartList = $('#cartList');
+        const cartTotal = $('#cartTotal');
+        let total = 0;
+
+        if (cart.length === 0) {
+            cartList.html(`
+                <div class="empty-cart-message">
+                    <i class="empty-cart-icon fas fa-shopping-cart"></i>
+                    Your cart is empty
+                </div>
+            `);
+        } else {
+            cartList.empty();
+            cart.forEach(item => {
+                const itemTotal = item.productPrice * item.quantity;
+                total += itemTotal;
+                
+                cartList.append(`
+                    <div class="list-group-item animate-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-0">${item.productDescription}</h6>
+                                <small class="text-muted">Quantity: ${item.quantity}</small>
+                            </div>
+                            <div class="text-right">
+                                <div class="product-price mb-2">$${(itemTotal).toFixed(2)}</div>
+                                <button class="btn btn-danger btn-sm remove-from-cart" 
+                                        onclick="removeFromCart('${item.productId}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+
+        cartTotal.text(total.toFixed(2));
+        updateCheckoutButton(total);
+    }
+
+    function updateCheckoutButton(total) {
+        const checkoutBtn = $('#checkout');
+        if (total > 0) {
+            checkoutBtn.prop('disabled', false)
+                .html('<i class="fas fa-shopping-bag mr-2"></i>Checkout ($' + total.toFixed(2) + ')');
+        } else {
+            checkoutBtn.prop('disabled', true)
+                .html('<i class="fas fa-shopping-bag mr-2"></i>Checkout');
+        }
+    }
+
+    function showNotification(message) {
+        const notification = $(`
+            <div class="notification" style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--sport-red);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 50px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                z-index: 1000;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+            ">
+                ${message}
+            </div>
+        `);
+        
+        $('body').append(notification);
+        setTimeout(() => notification.css({ opacity: 1, transform: 'translateY(0)' }), 100);
+        setTimeout(() => {
+            notification.css({ opacity: 0, transform: 'translateY(-20px)' });
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
+
+    // Handle checkout
+    $('#checkout').click(function() {
+        if (cart.length === 0) {
+            showNotification('Your cart is empty!');
+            return;
+        }
+        
+        // Here you would typically integrate with a payment gateway
+        // For now, we'll just clear the cart
+        cart = [];
+        saveCart();
+        showNotification('Order placed successfully!');
     });
 
     // Add a search function to filter products
