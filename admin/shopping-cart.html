@@ -3,30 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>Shopping Cart - Go to Sports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/styles/style.css">
+    <style>
+        :root {
+            --sport-red: #ff4d4d;
+            --sport-red-dark: #ff3333;
+            --sport-gray: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.1rem;
+            padding-top: 80px;
+        }
+
+        h2, h5 {
+            font-family: 'Russo One', sans-serif;
+            color: var(--sport-red);
+        }
+
+        .list-group-item {
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: none;
+            background: var(--sport-gray);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            padding: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .list-group-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .list-group-item .product-price {
+            color: var(--sport-red);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .list-group-item .btn-add-to-cart {
+            background: var(--sport-red);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .list-group-item .btn-add-to-cart:hover {
+            background: var(--sport-red-dark);
+            transform: translateY(-2px);
+        }
+
+        .cart-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        #cartList {
+            max-height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--sport-red) #f1f1f1;
+        }
+
+        #cartList::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #cartList::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        #cartList::-webkit-scrollbar-thumb {
+            background: var(--sport-red);
+            border-radius: 10px;
+        }
+
+        #checkout {
+            background: var(--sport-red);
+            border: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #checkout:hover {
+            background: var(--sport-red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 77, 77, 0.4);
+        }
+
+        #checkout::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.2),
+                rgba(255, 255, 255, 0)
+            );
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+
+        #checkout:hover::after {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--sport-red);
+            margin-bottom: 1rem;
+            text-align: right;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            color: #888;
+            padding: 2rem;
+            font-style: italic;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .empty-cart-icon {
+            font-size: 3rem;
+            color: var(--sport-red);
+            opacity: 0.5;
+        }
+
+        /* Add some animation classes */
+        .animate-item {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar {
+            background: rgba(255,255,255,0.95) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .navbar-brand {
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h2>Shopping Cart</h2>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold" href="../bootstrap.html">
+                <i class="fas fa-running mr-2"></i>Go to Sports
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html"><i class="fas fa-info-circle mr-1"></i> About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin/shopping-cart.html"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="returns.html"><i class="fas fa-undo mr-1"></i> Returns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin/product-management.html"><i class="fas fa-box-open mr-1"></i> Products</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Shopping Cart</h2>
         <div class="row">
             <div class="col-md-8">
-                <h5>Available Products</h5>
+                <h5 class="mb-3">Available Products</h5>
                 <ul id="productList" class="list-group">
                     <!-- Products will be dynamically loaded here -->
                 </ul>
             </div>
             <div class="col-md-4">
-                <h5>Your Cart</h5>
-                <ul id="cartList" class="list-group">
-                    <!-- Cart items will be dynamically loaded here -->
-                </ul>
-                <button id="checkout" class="btn btn-success mt-3">Checkout</button>
+                <div class="cart-section">
+                    <h5 class="mb-3">Your Cart</h5>
+                    <div id="cartList" class="list-group mb-2">
+                        <!-- Cart items will be dynamically loaded here -->
+                        <div class="empty-cart-message">
+                            <i class="empty-cart-icon fas fa-shopping-cart"></i>
+                            Your cart is empty
+                        </div>
+                    </div>
+                    <div class="total-price mb-3">
+                        Total: $<span id="cartTotal">0.00</span>
+                    </div>
+                    <button id="checkout" class="btn btn-lg w-100">
+                        <i class="fas fa-shopping-bag mr-2"></i>Checkout
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../assets/js/cart.js"></script>
 </body>
 </html>

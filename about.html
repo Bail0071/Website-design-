@@ -1,83 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About the Team</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Team - Go to Sports</title>
+    <!-- Add theme stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --sport-red: #ff4d4d;
+            --sport-blue: #007bff;
+        }
+
+        body {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.1rem;
+            background-color: #f4f4f4;
+            padding-top: 80px;
+            margin: 0;
+        }
+
+        /* Add your existing navbar styles here */
+
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://bushwellssportinggoods.com/files/2019/08/1565804514634_baseball.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-family: 'Russo One', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0 var(--sport-red);
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member h2 {
+            color: var(--sport-blue);
+            font-family: 'Russo One', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .contact-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-info a {
+            color: var(--sport-blue);
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--sport-red);
+            text-decoration: none;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            color: var(--sport-blue);
+            font-size: 1.2rem;
+            margin-right: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--sport-red);
+        }
+
+        /* Add these navbar-specific styles */
+        .navbar-brand {
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .logo-icon {
+            background: var(--sport-red);
+            color: white;
+            padding: 8px;
+            border-radius: 12px;
+            margin-right: 10px;
+            transform: rotate(-10deg);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(-10deg); }
+            50% { transform: translateY(-10px) rotate(-5deg); }
+            100% { transform: translateY(0px) rotate(-10deg); }
+        }
+
+        .navbar {
+            background: rgba(255,255,255,0.95) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem !important;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--sport-red);
+            color: white !important;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 20px;">
+<body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="bootstrap.html">Go to Sports</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="shoppingcart.html">Shopping Cart</a></li>
-            <li class="nav-item"><a class="nav-link" href="returns.html">Returns</a></li>
-        </ul>
+<!-- Replace existing navbar with this one -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="bootstrap.html">
+            <i class="fas fa-running mr-2"></i>Go to Sports
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html"><i class="fas fa-info-circle mr-1"></i> About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin/shopping-cart.html"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="returns.html"><i class="fas fa-undo mr-1"></i> Returns</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin/product-management.html"><i class="fas fa-box-open mr-1"></i> Products</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
-  
-  <header style="text-align: center; background-color: #007BFF; color: white; padding: 20px; border-radius: 5px;">
-    <h1>About the Team</h1>
-  </header>
+</nav>
 
-  <main style="max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-    <section>
-      <h2 style="color: #007BFF;">Meet the Team!</h2>
-      <p><strong>Name:</strong> Bailey Lutz</p>
-      <p><strong>Age:</strong> 21</p>
-      <p><strong>Hobbies:</strong> I enjoy to be active; running, biking, swimming, tennis, pickleball, skiing, surfing, you name it I love it. </p>
-      <p><strong>Favorite Quote:</strong> "Come to me, all who labor and are heavy laden, and I will give you rest." - Matthew 11:28 </p>
-    </section>
+<header class="page-header">
+    <div class="container">
+        <h1 class="display-4">Meet Our Team</h1>
+        <p class="lead">The passionate individuals behind Go to Sports</p>
+    </div>
+</header>
 
-    <section style="margin-top: 20px;">
-      <h2 style="color: #007BFF;">Contact Information</h2>
-      <p><strong>Email:</strong> Bal5782@psu.edu</p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bailey-lutz-46686424b/" style="color: #007BFF;">Bailey Lutz LinkedIn</a></p>
-    </section>
-  </main>
+<div class="container">
+    <div class="team-member animate__animated animate__fadeInUp">
+        <h2><i class="fas fa-user-circle mr-2"></i>Bailey Lutz</h2>
+        <p><strong>Age:</strong> 21</p>
+        <p><strong>Hobbies:</strong> I enjoy being active; running, biking, swimming, tennis, pickleball, skiing, surfing, you name it I love it.</p>
+        <p><strong>Favorite Quote:</strong> "Come to me, all who labor and are heavy laden, and I will give you rest." - Matthew 11:28</p>
+        
+        <div class="contact-info">
+            <h2><i class="fas fa-address-card mr-2"></i>Contact Information</h2>
+            <p><i class="fas fa-envelope mr-2"></i><strong>Email:</strong> Bal5782@psu.edu</p>
+            <p><i class="fab fa-linkedin mr-2"></i><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bailey-lutz-46686424b/" target="_blank">Bailey Lutz LinkedIn</a></p>
+        </div>
+    </div>
 
-<main style="max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
- <section>
-  <h2 style="color: #007BFF;">Meet the Team!</h2>
-  <p><strong>Name:</strong> Israel Olarewaju</p>
-  <p><strong>Age:</strong> 20</p>
-  <p><strong>Nickname:</strong> Izzy</p>
-  <p><strong>Fun Facts:</strong> I love working out, a passion that started with my time playing football. In my spare time, I enjoy drawing, experimenting in the kitchen, and learning languages—currently focusing on Yoruba to connect more deeply with my heritage.</p>
-  <p><strong>Life Goal:</strong> To strengthen my relationship with God and live a life guided by purpose and faith.</p>
- </section>
+    <div class="team-member animate__animated animate__fadeInUp">
+        <h2><i class="fas fa-user-circle mr-2"></i>Israel Olarewaju</h2>
+        <p><strong>Age:</strong> 20</p>
+        <p><strong>Nickname:</strong> Izzy</p>
+        <p><strong>Fun Facts:</strong> I love working out, a passion that started with my time playing football. In my spare time, I enjoy drawing, experimenting in the kitchen, and learning languages—currently focusing on Yoruba to connect more deeply with my heritage.</p>
+        <p><strong>Life Goal:</strong> To strengthen my relationship with God and live a life guided by purpose and faith.</p>
+        
+        <div class="contact-info">
+            <h2><i class="fas fa-address-card mr-2"></i>Contact Information</h2>
+            <p><i class="fas fa-envelope mr-2"></i><strong>Email:</strong> Izo5044@psu.edu</p>
+            <p><i class="fab fa-linkedin mr-2"></i><strong>LinkedIn:</strong> <a href="www.linkedin.com/in/israel-olarewaju-b36538275" target="_blank">Israel Olarewaju LinkedIn</a></p>
+        </div>
+    </div>
 
-<section style="margin-top: 20px;">
-    <h2 style="color: #007BFF;">Contact Information</h2>
-    <p><strong>Email:</strong> Izo5044@psu.edu</p>
-    <p><strong>LinkedIn:</strong> <a href="www.linkedin.com/in/israel-olarewaju-b36538275" style="color: #007BFF;">Israel Olarewaju LinkedIn</a></p>
-   </section>
-  </main>
+    <div class="team-member animate__animated animate__fadeInUp">
+        <h2><i class="fas fa-user-circle mr-2"></i>Michael Shiflet</h2>
+        <p><strong>Age:</strong> 20</p>
+        <p><strong>Nickname:</strong> Mick</p>
+        <p><strong>Fun Facts:</strong> I like to stay active with things like working out, golf, and soccer. In my free time I really enjoy playing all sorts of videogames</p>
+        <p><strong>Favorite Quote:</strong> "You win some, lose some, and wreck some." - Dale Earnhardt</p>
+        
+        <div class="contact-info">
+            <h2><i class="fas fa-address-card mr-2"></i>Contact Information</h2>
+            <p><i class="fas fa-envelope mr-2"></i><strong>Email:</strong> Mas8839@psu.edu</p>
+            <p><i class="fab fa-linkedin mr-2"></i><strong>LinkedIn:</strong> <a href="www.linkedin.com/in/michael-shiflett-440779332/" target="_blank">Michael Shiflett LinkedIn</a></p>
+        </div>
+    </div>
+</div>
 
-<main style="max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
- <section>
-  <h2 style="color: #007BFF;">Meet the Team!</h2>
-  <p><strong>Name:</strong> Michael Shiflet</p>
-  <p><strong>Age:</strong> 20</p>
-  <p><strong>Nickname: </strong> Mick</p>
-  <p><strong>Fun Facts:</strong> I like to stay active with things like working out, golf, and soccer. In my free time I really enjoy playing all sorts of videogames </p>
-  <p><strong>Favorite Quote:</strong> "You win some, lose some, and wreck some." - Dale Earnhardt</p>
- </section>
+<footer class="text-center">
+    <p>&copy; 2024 Go to Sports. All rights reserved.</p>
+</footer>
 
-<section style="margin-top: 20px;">
-    <h2 style="color: #007BFF;">Contact Information</h2>
-    <p><strong>Email:</strong> Mas8839@psu.edu</p>
-    <p><strong>LinkedIn:</strong> <a href="www.linkedin.com/in/michael-shiflett-440779332/" style="color: #007BFF;">Michael Shiflett LinkedIn</a></p>
-   </section>
-  </main>
-  
-  <footer style="text-align: center; margin-top: 20px; color: #777;">
-    <p>&copy; 2024 Your Name. All rights reserved.</p>
-  </footer>
+<!-- Add Bootstrap scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
