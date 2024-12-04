@@ -34,4 +34,17 @@ router.post('/:id/reviews', async (req, res) => {
     }
 });
 
+// Delete a product
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+        if (!deletedProduct) {
+            return res.status(404).json('Product not found');
+        }
+        res.json('Product deleted');
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
+});
+
 module.exports = router;
