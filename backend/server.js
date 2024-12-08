@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const productsRouter = require('./routes/products');
-
+const returnsRouter = require('./routes/returns');
 const app = express();
 const port = 3001;
 
@@ -21,6 +21,7 @@ connection.once('open', () => {
 });
 
 app.use('/api/products', productsRouter);
+app.use('/api/returns', returnsRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
